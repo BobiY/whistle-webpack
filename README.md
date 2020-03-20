@@ -1,0 +1,2 @@
+# whistle-webpack
+webpack package
