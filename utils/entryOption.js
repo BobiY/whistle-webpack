@@ -16,7 +16,8 @@ const singleEntry = () => {  // 查找单入口文件，如果不存在，按照
 const multipEntry = () => {
     const files = glob.sync(path.join(process.cwd(), '/src/**/index.@(js|jsx|ts|tsx)'));
     const handleFun = filepath => {
-        return item.split("src/")[1] ? item.split("src/")[1].match(match)[1] : ''
+        const match = /(\w*)\/index.(js|jsx|ts|tsx)/
+        return filepath.split("src/")[1] ? filepath.split("src/")[1].match(match)[1] : ''
     }
     return generatorEntryFiles(files, handleFun);
 }
