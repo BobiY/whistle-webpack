@@ -14,7 +14,7 @@ const singleEntry = () => {  // 查找单入口文件，如果不存在，按照
 
 const multipEntry = () => {
     const files = glob.sync(path.join(process.cwd(), '/src/**/index.@(js|jsx|ts|tsx)'));
-    const match = /(\w*)\/index.[js|jsx|ts|tsx]/;
+    const match = /(\w*)\/index.(js|jsx|ts|tsx)/;
     const entry = {};
     files.forEach( item => {
         const entryName = item.split("src/")[1] ? item.split("src/")[1].match(match)[1] : '';
