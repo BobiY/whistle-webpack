@@ -4,8 +4,8 @@ const path = require('path');
 const singleEntryHtml = (htmlPlugin, filename) => {
     const pluginsOption = {
         template: path.join(process.cwd(), 'index.html'),
-        filename: path.join(`${filename}.html`),
-        chunks: ['common', filename],
+        filename: `${filename}.html`,
+        chunks: [ filename ],
         inject: true,
         minify: {
             html5: true,
