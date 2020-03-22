@@ -20,12 +20,6 @@ const singleEntryHtml = (htmlPlugin, filename) => {
 } 
 
 module.exports = (htmlPlugin, filename) => {
-    const htmlPagePlugins = [];
-    if ( (typeof filename).toLowerCase() === 'string' ) {
-        const singleFileName = path.relative(process.cwd()+'/src',filename).split(".")[0];
-        return [singleEntryHtml(htmlPlugin, singleFileName, true)];
-    }
-
     return Object.keys( filename ).map( item => {
         return singleEntryHtml(htmlPlugin, item)
     } );
