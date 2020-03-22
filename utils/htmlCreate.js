@@ -21,7 +21,7 @@ const singleEntryHtml = (htmlPlugin, filename) => {
 module.exports = (htmlPlugin, filename) => {
     const htmlPagePlugins = [];
     if ( (typeof filename).toLowerCase() === 'string' ) {
-        return htmlPagePlugins.push(singleEntryHtml(htmlPlugin, filename));
+        return [singleEntryHtml(htmlPlugin, filename)];
     }
 
     return Object.keys( filename ).map( item => {
