@@ -2,9 +2,9 @@
 const path = require('path');
 
 const singleEntryHtml = (htmlPlugin, filename) => {
-    return new htmlPlugin({
+    const pluginsOption = {
         template: path.join(process.cwd(), 'index.html'),
-        filename: `${filename}.html`,
+        filename: path.join(`${filename}.html`),
         chunks: [filename],
         inject: true,
         minify: {
@@ -15,13 +15,15 @@ const singleEntryHtml = (htmlPlugin, filename) => {
             minifyJS: true,
             removeComments: false // 移除注释
         }
-    });
+    }
+    return new htmlPlugin(pluginsOption);
 } 
 
 module.exports = (htmlPlugin, filename) => {
     const htmlPagePlugins = [];
     if ( (typeof filename).toLowerCase() === 'string' ) {
-        return [singleEntryHtml(htmlPlugin, filename)];
+        const singleFileName = path.relative(process.cwd()+'/src',filename).split(".")[0];
+        return [singleEntryHtml(htmlPlugin, singleFileName, true)];
     }
 
     return Object.keys( filename ).map( item => {
