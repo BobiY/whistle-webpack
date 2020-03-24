@@ -1,0 +1,19 @@
+language: node_js
+
+sudo: false
+
+cache: 
+  apt: true
+  directories:
+    - node_modules
+
+node_js: stable
+
+install:
+  - npm install # 安装依赖
+  - cd ./example
+  - npm install 
+  - cd ../
+
+script:
+  - npm test
