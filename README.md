@@ -26,14 +26,6 @@ src |
 ~~~ 
 
 会自动读取`./src/index.(js|jsx|ts|tsx)` 或者 `./src/**/index.(js|jsx|ts|tsx)`
-**命令行输入**
-
-可以在命令行中直接使用
-~~~
-whistle-webpack --mode build
-// 或者
-whistle-webpack
-~~~
 
 ### 关于模式
 
@@ -43,7 +35,14 @@ whistle-webpack
 - dev-server 模式，用于本地开发
 - watch 模式，类似于 `webpack --watch`
 
-以上三种模式，通过命令行参数指定
+
+全局安装
+
+~~~
+npm intall -g whistle-webpack
+~~~
+
+通过命令行参数指定
 ~~~
 // 生产打包
 whistle-webpack --mode build
@@ -57,20 +56,26 @@ whistle-webpack --mode dev-server --port 3000
 // 监听模式
 whistle-webpack --mode watck
 ~~~
-
+或者文件夹下安装，在 package.json 中添加
+~~~
+"script": {
+    "build": "whistle-webpack",
+    "dev": "whistle-webpack --mode dev-server --port 3000",
+    "watch": "whistle-webpack --mode watck"
+}
+~~~
 ### 自己的配置文件
 
 如果想扩展包中包含的三种模式的配置文件，可以这样做
 
 ~~~
 const webpackMerge = require('webpack-merge');
-const baseConfig = require('whistle-webpack/lib/webpack.base'); // 基础配置
 
-const devConfig = require('whistle-webpack/lib/webpack.dev'); // 开发阶段配置
+const devConfig = require('whistle-webpack')('development'); // 开发阶段配置
 
-const prodConfig = require('whistle-webpack/lib/webpack.prod'); // 生产阶段配置
+const prodConfig = require('whistle-webpack')('production'); // 生产阶段配置
 
-const watchConfig = require('whistle-webpack/lib/webpack.watch'); // 本地监听模式配置
+const watchConfig = require('whistle-webpack')(); // 基础配置
 
 const selfConfig = {
     plugins: []
