@@ -12,7 +12,7 @@ class App extends React.Component<any,any> {
     }
 
     render() {
-        return <div id="hello" className='a'>hello world</div>
+        return <div id="hello" className='a' style={{color: "red"}}>hello world</div>
     }
 }
 

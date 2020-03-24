@@ -1,53 +1,82 @@
 #!/usr/bin/env node
-// const fs = require('fs');
+const fs = require('fs');
 const webpack = require('webpack');
 const path = require('path');
 const WebpackDevServer = require('webpack-dev-server');
-const configFile = process.argv[2] || 'webpack.config.js';
-const config = require(path.join(process.cwd(), configFile));
-let devServer = {};
-const express = require('express');
-// 获取devServer 配置，如果存在
-if( config.devServer ) {
-    devServer = config.devServer;
+var program = require('commander');
+const version = require('../package.json'); 
+const argsResolve = require('../utils/argsResolve');
+const colors = require('colors');
+program
+  .version(version.version)
+  .option('-m, --mode [modeString]', 'select mode in build or dev-server or watch')
+  .option('-P, --port [number]', 'input server port')
+  .option('-c, --config [filename]', 'webpack config file url')
+  .parse(process.argv);
+
+// 保存 webpack 配置
+let webpackConfig = require('../lib/webpack.prod');
+
+// 检测参数的合法性，并给与默认值
+const param = argsResolve(program);
+
+// 如果存在自定义的 config 文件，则读取配置
+if( param.config ) {
+  try{
+    const fileOk = fs.accessSync(path.join(process.cwd(), param.config));
+    webpackConfig = require(path.resolve(process.cwd(), param.config));
+  }catch(err) {
+    console.log(colors.red(`${path.resolve(process.cwd(), param.config)} 不存在，请确认文件路径后重试`));
+    process.exit(2);
+  }
 }
-const complier = webpack(config);
-const server = new WebpackDevServer(complier, devServer);
 
-server.listen(8080, '127.0.0.1', () => {
-  console.log('Starting server on http://localhost:8080');
-});
-
-// // const webpackConfig = require('./webpack.config.js')
-
-// const DIST_DIR = path.join(process.cwd(), devServer.contentBase || "dist");// 设置静态访问文件路径
-// const PORT = devServer.port || 8080; // 设置启动端口
-
-// const complier = webpack(config); 
-// if ( !Object.keys(devServer).length ) {
-//     return ;
-// }
-// const app = express();
-// app.use(webpackDevMiddleware(complier, devServer));
-// // {
-// //     // 这里是对 webpackDevMiddleware 的一些配置，具体其他配置我们下面已经列出来了。
-
-// //     //绑定中间件的公共路径,与webpack配置的路径相同
-// //     publicPath: webpackConfig.output.publicPath,
-// //     quiet: true  //向控制台显示任何内容 
-// // )
+if ( param.mode === "build" ) {
+  // 打包
+  webpack( webpackConfig, (err, stats) => {
+    if ( err ){
+      console.log(err);
+      process.exit(2);
+    }
+    // 将 webpack build 的信息打印出来
+    console.log(stats.toString({
+        colors: true,
+        modules: false,
+        children: true
+    }));
+  } )
+}
 
 
-// // 这个方法和下边注释的方法作用一样，就是设置访问静态文件的路径
-// app.use(express.static(DIST_DIR))
+// 本地开发模式
+if(param.mode === "dev-server") {
+  webpackConfig = require('../lib/webpack.dev');
+  let devServer = {};
+  if( webpackConfig.devServer ) {
+      devServer = webpackConfig.devServer;
+      delete webpackConfig.devServer;
+  }
+  const complier = webpack(webpackConfig);
+  const server = new WebpackDevServer(complier, devServer);
 
-// app.listen(PORT, function (err) {
-//     if (err) {
-//       console.error(err)
-//       return
-//     }
-  
-//     // var protocol = https ? 'https' : 'http'
-//     // console.log('Listening at ' + protocol + '://' + serverConfig.hostname + ':' + serverConfig.port)
-//     console.log(`Listening at localhost:${PORT}`);
-//   })
+  server.listen(param.port || 8080, '127.0.0.1', () => {
+    console.log('Starting server on http://localhost:' + (param.port || 8080));
+  });  
+}
+
+// 本地监听模式
+if( param.mode === "watch" ) {
+  webpackConfig = require('../lib/webpack.watch');
+  webpack( webpackConfig, (err, stats) => {
+    if ( err ){
+      console.log(err);
+      process.exit(2);
+    }
+    // 将 webpack build 的信息打印出来
+    console.log(stats.toString({
+        colors: true,
+        modules: false,
+        children: true
+    }));
+  } )
+};

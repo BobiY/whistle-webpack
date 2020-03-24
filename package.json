@@ -3,7 +3,9 @@
   "version": "1.0.4",
   "description": "webpack package",
   "main": "index.js",
-  "bin": "./bin/whistle-webpack",
+  "bin": {
+    "whistle-webpack": "./bin/whistle-webpack.js"
+  },
   "scripts": {
     "eslint": "eslint lib/ --fix",
     "somke:test": "node ./test/smoke/index.js",
@@ -30,9 +32,9 @@
     "autoprefixer": "^9.7.4",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
+    "colors": "^1.4.0",
     "css-loader": "^3.4.2",
     "cssnano": "^4.1.10",
-    "express": "^4.17.1",
     "file-loader": "^6.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "glob": "^7.1.6",
@@ -54,9 +56,11 @@
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
+    "commander": "^5.0.0",
     "conventional-changelog-cli": "^2.0.31",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
     "husky": "^4.2.3",
     "mocha": "^7.1.1",
     "nyc": "^15.0.0",
