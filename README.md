@@ -7,6 +7,27 @@ yarn add whistle-webpack -D
 
 ### 使用
 
+**目录结构**
+
+1. 单入口文件
+~~~
+src |  
+    |-index.(js|jsx|ts|tsx)
+~~~
+如果想使用 `react`，需要自行安装 `react` 和 `react-dom`, 默认支持 react 编译
+
+2. 多入口文件
+~~~
+src |
+    |-index |
+            |-index.js
+    |-search|
+            |-index.js
+~~~ 
+
+会自动读取`./src/index.(js|jsx|ts|tsx)` 或者 `./src/**/index.(js|jsx|ts|tsx)`
+**命令行输入**
+
 可以在命令行中直接使用
 ~~~
 whistle-webpack --mode build
