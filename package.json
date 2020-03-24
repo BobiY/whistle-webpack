@@ -8,7 +8,9 @@
     "eslint": "eslint lib/ --fix",
     "somke:test": "node ./test/smoke/index.js",
     "test": "mocha",
-    "coverage": "nyc npm run test"
+    "coverage": "nyc npm run test",
+    "commitmsg": "validate-commit-msg",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "repository": {
     "type": "git",
@@ -52,10 +54,13 @@
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
+    "conventional-changelog-cli": "^2.0.31",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
+    "husky": "^4.2.3",
     "mocha": "^7.1.1",
     "nyc": "^15.0.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "validate-commit-msg": "^2.14.0"
   }
 }
