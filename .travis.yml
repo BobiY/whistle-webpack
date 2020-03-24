@@ -16,4 +16,4 @@ install:
   - cd ../
 
 script:
-  - npm test
+  - npm coverage
