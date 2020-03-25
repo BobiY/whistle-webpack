@@ -1,6 +1,6 @@
 {
   "name": "whistle-webpack",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "webpack package",
   "main": "index.js",
   "bin": {
