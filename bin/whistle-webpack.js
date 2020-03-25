@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+/**
+ * .whistlerc.js  自定义配置文件
+ */
 const fs = require('fs');
 const webpack = require('webpack');
 const path = require('path');
@@ -24,7 +27,7 @@ const param = argsResolve(program);
 if( param.config ) {
   try{
     const fileOk = fs.accessSync(path.join(process.cwd(), param.config));
-    webpackConfig = require(path.resolve(process.cwd(), param.config));
+    webpackConfig = require(path.resolve(process.cwd(), param.config));  // 读取自定义配置
   }catch(err) {
     console.log(colors.red(`${path.resolve(process.cwd(), param.config)} 不存在，请确认文件路径后重试`));
     process.exit(2);
