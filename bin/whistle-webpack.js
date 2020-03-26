@@ -7,9 +7,9 @@ const webpack = require('webpack');
 const path = require('path');
 const WebpackDevServer = require('webpack-dev-server');
 var program = require('commander');
+const colors = require('colors');
 const version = require('../package.json'); 
 const argsResolve = require('../utils/argsResolve');
-const colors = require('colors');
 const workProVersion = require(path.join(`${process.cwd()}`, 'package.json')) || {};
 program
   .version(version.version)
@@ -36,7 +36,6 @@ if( param.config ) {
 }
 
 if ( param.mode === "build" ) {
-  // 打包
 
   // 打印打包信息
   console.log('\n');
@@ -95,3 +94,19 @@ if( param.mode === "watch" ) {
     }));
   } )
 };
+
+
+// const watch = require('watch');
+// const createRouter = require('../utils/createRouter');
+// watch.watchTree(path.join(process.cwd(), 'src'), function (f, curr, prev) {
+//   if (typeof f == "object" && prev === null && curr === null) {
+//     // 第一次解析完目标目录
+//     createRouter(f, 'init');
+//   } else if (prev === null) {
+//     // 创建了一个新的文件
+//     createRouter(f, 'create');
+//   } else if (curr.nlink === 0) {
+//     //删除了一个文件
+//     createRouter(f, 'delete');
+//   }
+// })
