@@ -101,3 +101,21 @@ npm install husky -D
 - alpha：是内部测试版本，一般不向外发布，会有很多 bug。
 - beta：也是测试版，这个阶段的版本会一直加入新的功能。在 alpha 版本以后推出
 - rc: 系统平台上就是发行候选版本。RC 版不会再加入新的功能，主要用于除错。
+
+
+
+
+
+
+src |
+    |- layout.tsx  // 布局文件
+    |- index.tsx // 总入口文件
+    |- routers.ts // 路由配置文件
+    |- search |             // 路由目录
+              | - index.tsx 
+
+    |- home   |             // 路由目录
+              | - index.tsx
+
+
+监听文件变化，如果目录结构有变化，重新生成路由路径

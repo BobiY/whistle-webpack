@@ -10,6 +10,7 @@ var program = require('commander');
 const version = require('../package.json'); 
 const argsResolve = require('../utils/argsResolve');
 const colors = require('colors');
+const workProVersion = require(path.join(`${process.cwd()}`, 'package.json')) || {};
 program
   .version(version.version)
   .option('-m, --mode [modeString]', 'select mode in build or dev-server or watch')
@@ -36,6 +37,11 @@ if( param.config ) {
 
 if ( param.mode === "build" ) {
   // 打包
+
+  // 打印打包信息
+  console.log('\n');
+  console.log(`> ${path.basename(process.cwd())}@${workProVersion.version} build ${process.cwd()}`)
+  console.log(`> whistie-webpack@${version.version} \n\n`)
   webpack( webpackConfig, (err, stats) => {
     if ( err ){
       console.log(err);
@@ -69,6 +75,12 @@ if(param.mode === "dev-server") {
 
 // 本地监听模式
 if( param.mode === "watch" ) {
+
+  // 打印信息
+  console.log('\n');
+  console.log(`> ${path.basename(process.cwd())}@${workProVersion.version} watch ${process.cwd()}`)
+  console.log(`> whistie-webpack@${version.version} \n\n`)
+
   webpackConfig = require('../lib/webpack.watch');
   webpack( webpackConfig, (err, stats) => {
     if ( err ){
