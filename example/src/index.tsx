@@ -2,8 +2,9 @@ import React from "react";
 import { HashRouter, Link } from "react-router-dom";
 import { renderRoutes } from "react-router-config";
 import ReactDOM from "react-dom";
-import getComponents from "../getComponent";
-
+import getComponents from "getComponent";
+import "getComponent/dist/getComponent.css"
+console.log(getComponents);
 const routers = [
     {
         path: '/search',

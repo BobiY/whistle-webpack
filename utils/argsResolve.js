@@ -1,6 +1,6 @@
 // 传递参数解析
 
-const uniqueParam = ['build', 'dev-server', 'watch'];  // 模式只能选择一种需要做合法性检测
+const uniqueParam = ['build', 'dev-server', 'watch', 'library'];  // 模式只能选择一种需要做合法性检测
 
 module.exports = function paramResolve(param){
     const { mode, port, config } = param;

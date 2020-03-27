@@ -55,6 +55,26 @@ if ( param.mode === "build" ) {
   } )
 }
 
+// 打包库的模式
+if ( param.mode === "library" ) {
+  webpackConfig = require('../lib/webpack.bundle');
+  // 打印打包信息
+  console.log('\n');
+  console.log(`> ${path.basename(process.cwd())}@${workProVersion.version} build ${process.cwd()}`)
+  console.log(`> whistie-webpack@${version.version} \n\n`)
+  webpack( webpackConfig, (err, stats) => {
+    if ( err ){
+      console.log(err);
+      process.exit(2);
+    }
+    // 将 webpack build 的信息打印出来
+    console.log(stats.toString({
+        colors: true,
+        modules: false,
+        children: true
+    }));
+  } )
+}
 
 // 本地开发模式
 if(param.mode === "dev-server") {

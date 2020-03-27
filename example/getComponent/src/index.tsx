@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./index.less";
 // 加载异步组件 用于路由的代码分割
 export default function getComponents(getComponent) {
   return class AsyncComponent extends React.Component<any, any> {

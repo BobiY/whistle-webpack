@@ -10,6 +10,9 @@ module.exports = function getOption(evnString, option) {
             // 生产相关配置
             const prodConfig = require('./lib/webpack.prod');
             return prodConfig;
+        case 'bundle':
+            const bundleConfig = require('./lib/webpack.bundle');
+            return bundleConfig;
         case 'ssr':
         case 'dll':
             // 打包相关包的集合 react react-dom 等的集合包
