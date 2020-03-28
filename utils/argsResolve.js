@@ -21,6 +21,8 @@ module.exports = function paramResolve(param){
     if (config) {
         result.config = config;
     }
-
+    if ( param.create ) {
+        result.create = param.create;
+    }
     return result;
 }

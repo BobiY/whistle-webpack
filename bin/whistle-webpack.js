@@ -10,12 +10,12 @@ var program = require('commander');
 const colors = require('colors');
 const version = require('../package.json'); 
 const argsResolve = require('../utils/argsResolve');
-const workProVersion = require(path.join(`${process.cwd()}`, 'package.json')) || {};
 program
   .version(version.version)
   .option('-m, --mode [modeString]', 'select mode in build or dev-server or watch')
   .option('-P, --port [number]', 'input server port')
   .option('-c, --config [filename]', 'webpack config file url')
+  .option('-a, --create', 'create a simple app')
   .parse(process.argv);
 
 // 保存 webpack 配置
@@ -35,8 +35,18 @@ if( param.config ) {
   }
 }
 
+// 创建简单项目目录
+if ( param.create ) {
+    console.log(`begin create app....`);
+    const createApp = require('../utils/CopyDir');
+    const sourcePath = path.join(__dirname, '../utils/template');
+    const targetPath = process.cwd();
+    createApp.checkDirectory(sourcePath, targetPath);
+    return ;
+}
+const workProVersion = require(path.join(`${process.cwd()}`, 'package.json')) || {};
+// 生产环境打包
 if ( param.mode === "build" ) {
-
   // 打印打包信息
   console.log('\n');
   console.log(`> ${path.basename(process.cwd())}@${workProVersion.version} build ${process.cwd()}`)

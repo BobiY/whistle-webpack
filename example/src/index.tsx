@@ -2,19 +2,19 @@ import React from "react";
 import { HashRouter, Link } from "react-router-dom";
 import { renderRoutes } from "react-router-config";
 import ReactDOM from "react-dom";
-import getComponents from "getComponent";
+import {getComponent} from "getComponent";
 import "getComponent/dist/getComponent.css"
-console.log(getComponents);
+// console.log(getComponent);
 const routers = [
     {
         path: '/search',
         // exact: true,
-        component: getComponents(() => import(/* webpackChunkName: "search" */ "./search/index"))
+        component: getComponent(() => import(/* webpackChunkName: "search" */ "./search/index"))
     },
     {
         path: '/home',
         // exact: true,
-        component: getComponents(() => import(/* webpackChunkName: "indes" */ "./index/index"))
+        component: getComponent(() => import(/* webpackChunkName: "indes" */ "./index/index"))
     }
 ]
 const RenderRouter = () => (
