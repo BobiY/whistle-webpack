@@ -96,7 +96,7 @@ if(param.mode === "dev-server") {
   }
   const complier = webpack(webpackConfig);
   const server = new WebpackDevServer(complier, devServer);
-
+  
   server.listen(param.port || 8080, '127.0.0.1', () => {
     console.log('Starting server on http://localhost:' + (param.port || 8080));
   });  

@@ -4,13 +4,14 @@ import { renderRoutes } from "react-router-config";
 import ReactDOM from "react-dom";
 import {getComponent} from "getComponent";
 import "getComponent/dist/getComponent.css"
-// console.log(getComponent);
+// console.log(getComponent);   
 const routers = [
     {
         path: '/search',
         // exact: true,
         component: getComponent(() => import(/* webpackChunkName: "search" */ "./search/index"))
     },
+
     {
         path: '/home',
         // exact: true,
