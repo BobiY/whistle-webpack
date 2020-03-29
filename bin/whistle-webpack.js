@@ -124,19 +124,3 @@ if( param.mode === "watch" ) {
     }));
   } )
 };
-
-
-// const watch = require('watch');
-// const createRouter = require('../utils/createRouter');
-// watch.watchTree(path.join(process.cwd(), 'src'), function (f, curr, prev) {
-//   if (typeof f == "object" && prev === null && curr === null) {
-//     // 第一次解析完目标目录
-//     createRouter(f, 'init');
-//   } else if (prev === null) {
-//     // 创建了一个新的文件
-//     createRouter(f, 'create');
-//   } else if (curr.nlink === 0) {
-//     //删除了一个文件
-//     createRouter(f, 'delete');
-//   }
-// })
