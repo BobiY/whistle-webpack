@@ -15,7 +15,7 @@ program
   .option('-m, --mode [modeString]', 'select mode in build or dev-server or watch')
   .option('-P, --port [number]', 'input server port')
   .option('-c, --config [filename]', 'webpack config file url')
-  .option('-a, --create', 'create a simple app')
+  .option('-a, --create', 'create a simple app') // 创建一个简单的 app
   .parse(process.argv);
 
 // 保存 webpack 配置
