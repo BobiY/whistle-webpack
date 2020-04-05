@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
  * .whistlerc.js  自定义配置文件
+ * 入口文件为空检测 未实现
  */
 const fs = require('fs');
 const webpack = require('webpack');
