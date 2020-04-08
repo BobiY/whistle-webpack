@@ -17,6 +17,7 @@ class CheckEntry {
     getModeConfig(mode) {
         if( !mode ) {
             this.someTipInfo();
+            return false; // 返回 false 表示传的 mode 为空
         }
         switch(mode) {
             case 'dev':
